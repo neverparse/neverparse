@@ -1,0 +1,66 @@
+{
+  "$schema": "./schema.json",
+  "products": [
+    {
+      "slug": "infer",
+      "name": "Infer",
+      "tagline": "Schema inference, validation & type generation for agents.",
+      "description": "POST any JSON and get back a JSON Schema, TypeScript type, Zod schema, or OpenAPI component. Agents use Infer to understand unknown data, validate tool outputs, and generate typed interfaces on the fly.",
+      "status": "active",
+      "version": "0.1.0",
+      "category": "schema",
+      "endpoints": [
+        {
+          "method": "POST",
+          "path": "/api/v1/infer/detect",
+          "description": "Infer JSON Schema from data"
+        },
+        {
+          "method": "POST",
+          "path": "/api/v1/infer/validate",
+          "description": "Validate data against a schema"
+        },
+        {
+          "method": "POST",
+          "path": "/api/v1/infer/generate",
+          "description": "Generate TypeScript/Zod types from schema"
+        }
+      ],
+      "examples": {
+        "curl": "curl -X POST https://neverparse.com/api/v1/infer/detect \\\n  -H 'Content-Type: application/json' \\\n  -d '{\"data\": {\"name\": \"Alice\", \"age\": 30, \"active\": true}}'",
+        "typescript": "const res = await fetch('https://neverparse.com/api/v1/infer/detect', {\n  method: 'POST',\n  headers: { 'Content-Type': 'application/json' },\n  body: JSON.stringify({ data: { name: 'Alice', age: 30, active: true } })\n});\nconst { schema } = await res.json();",
+        "python": "import requests\nres = requests.post('https://neverparse.com/api/v1/infer/detect',\n  json={'data': {'name': 'Alice', 'age': 30, 'active': True}})\nschema = res.json()['schema']"
+      },
+      "pricing": "free-tier",
+      "metrics": {
+        "requests": 0,
+        "errors": 0,
+        "avgLatencyMs": 0,
+        "signups": 0
+      },
+      "validation": {
+        "githubStars": 0,
+        "ctaClicks": 0,
+        "apiCalls": 0,
+        "lastChecked": null
+      },
+      "deploy": {
+        "platform": "vercel",
+        "url": null,
+        "lastDeployed": null,
+        "status": "pending"
+      },
+      "createdAt": "2026-02-24",
+      "updatedAt": "2026-02-24"
+    }
+  ],
+  "config": {
+    "killThresholds": {
+      "minApiCallsPerWeek": 10,
+      "minSignupsPerMonth": 5,
+      "maxErrorRate": 0.1,
+      "evaluationWindowDays": 30
+    },
+    "validationSchedule": "daily"
+  }
+}
