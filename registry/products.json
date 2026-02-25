@@ -54,6 +54,58 @@
       "updatedAt": "2026-02-24"
     },
     {
+      "slug": "errormap",
+      "name": "ErrorMap",
+      "tagline": "Normalize any API error into RFC 9457 Problem Details with agent-ready classification.",
+      "description": "POST any API error response — JSON, HTML, plain text — and get back a consistent RFC 9457 Problem Details object with error classification, retryability, and suggested recovery actions. Agents use ErrorMap to handle failures from any API without custom error parsers.",
+      "status": "active",
+      "version": "0.1.0",
+      "category": "reliability",
+      "endpoints": [
+        {
+          "method": "POST",
+          "path": "/api/v1/errormap/parse",
+          "description": "Parse any raw error into structured Problem Details with classification"
+        },
+        {
+          "method": "POST",
+          "path": "/api/v1/errormap/normalize",
+          "description": "Normalize a JSON error object to RFC 9457 format"
+        },
+        {
+          "method": "POST",
+          "path": "/api/v1/errormap/classify",
+          "description": "Classify an error by category with retry guidance"
+        }
+      ],
+      "examples": {
+        "curl": "curl -X POST https://neverparse.com/api/v1/errormap/parse \\\n  -H 'Content-Type: application/json' \\\n  -d '{\"raw\": {\"error\": {\"code\": \"RATE_LIMIT_EXCEEDED\", \"message\": \"Too many requests\"}}, \"statusCode\": 429, \"headers\": {\"Retry-After\": \"30\"}}'",
+        "typescript": "const res = await fetch('https://neverparse.com/api/v1/errormap/parse', {\n  method: 'POST',\n  headers: { 'Content-Type': 'application/json' },\n  body: JSON.stringify({\n    raw: { error: { code: 'RATE_LIMIT_EXCEEDED', message: 'Too many requests' } },\n    statusCode: 429,\n    headers: { 'Retry-After': '30' }\n  })\n});\nconst { problem } = await res.json();\nif (problem.retryable) await sleep(problem.retryAfterMs);",
+        "python": "import requests\nres = requests.post('https://neverparse.com/api/v1/errormap/parse',\n  json={'raw': {'error': {'code': 'RATE_LIMIT_EXCEEDED', 'message': 'Too many requests'}}, 'statusCode': 429, 'headers': {'Retry-After': '30'}})\nproblem = res.json()['problem']\nif problem['retryable']: time.sleep(problem['retryAfterMs'] / 1000)"
+      },
+      "pricing": "free-tier",
+      "metrics": {
+        "requests": 0,
+        "errors": 0,
+        "avgLatencyMs": 0,
+        "signups": 0
+      },
+      "validation": {
+        "githubStars": 0,
+        "ctaClicks": 0,
+        "apiCalls": 0,
+        "lastChecked": null
+      },
+      "deploy": {
+        "platform": "vercel",
+        "url": null,
+        "lastDeployed": null,
+        "status": "pending"
+      },
+      "createdAt": "2026-02-24",
+      "updatedAt": "2026-02-24"
+    },
+    {
       "slug": "toolbridge",
       "name": "ToolBridge",
       "tagline": "Universal tool definition converter for multi-provider agents.",

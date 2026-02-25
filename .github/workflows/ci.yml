@@ -1,0 +1,66 @@
+# Neverparse CI Pipeline
+# Runs on every push and pull request to validate code quality and build.
+#
+# === Rollback Procedures ===
+# How to rollback a bad deployment:
+#   1. Via Vercel CLI: `vercel rollback` (rolls back to previous deployment)
+#   2. Via git: `git revert <bad-commit> && git push` (triggers new deploy)
+#   3. Via Vercel dashboard: Deployments > select previous > Promote to Production
+#
+# How to check deployment status:
+#   - Vercel CLI: `vercel ls` or `vercel inspect <url>`
+#   - Vercel dashboard: https://vercel.com/peoplecontexts-projects/neverparse
+#   - Health endpoint: https://neverparse.com/api/health
+#
+# How to view build logs:
+#   - GitHub: Actions tab > select workflow run
+#   - Vercel CLI: `vercel logs <url>`
+#   - Vercel dashboard: Deployments > select deployment > Build Logs
+
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  ci:
+    name: Typecheck, Lint, Test & Build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Typecheck
+        run: npx tsc --noEmit
+
+      - name: Lint
+        run: npx next lint
+
+      - name: Test
+        run: npx vitest run
+
+      - name: Build
+        run: npx next build
+
+      - name: Health check (main only)
+        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+        run: |
+          echo "Vercel handles deployment from main branch."
+          echo "After deploy, verify: https://neverparse.com/api/health"
