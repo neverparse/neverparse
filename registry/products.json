@@ -104,6 +104,58 @@
       },
       "createdAt": "2026-02-24",
       "updatedAt": "2026-02-24"
+    },
+    {
+      "slug": "toolbridge",
+      "name": "ToolBridge",
+      "tagline": "Universal tool definition converter for multi-provider agents.",
+      "description": "Convert tool definitions between OpenAI function calling, Anthropic tool use, MCP tool schema, and JSON Schema formats. Agents use ToolBridge to work across providers without manual format translation.",
+      "status": "active",
+      "version": "0.1.0",
+      "category": "interop",
+      "endpoints": [
+        {
+          "method": "POST",
+          "path": "/api/v1/toolbridge/convert",
+          "description": "Convert a tool definition between formats"
+        },
+        {
+          "method": "POST",
+          "path": "/api/v1/toolbridge/detect",
+          "description": "Auto-detect the format of a tool definition"
+        },
+        {
+          "method": "POST",
+          "path": "/api/v1/toolbridge/batch",
+          "description": "Convert up to 100 tool definitions at once"
+        }
+      ],
+      "examples": {
+        "curl": "curl -X POST https://neverparse.com/api/v1/toolbridge/convert \\\n  -H 'Content-Type: application/json' \\\n  -d '{\"tool\": {\"type\": \"function\", \"function\": {\"name\": \"get_weather\", \"description\": \"Get weather\", \"parameters\": {\"type\": \"object\", \"properties\": {\"location\": {\"type\": \"string\"}}, \"required\": [\"location\"]}}}, \"from\": \"openai\", \"to\": \"anthropic\"}'",
+        "typescript": "const res = await fetch('https://neverparse.com/api/v1/toolbridge/convert', {\n  method: 'POST',\n  headers: { 'Content-Type': 'application/json' },\n  body: JSON.stringify({\n    tool: { type: 'function', function: { name: 'get_weather', description: 'Get weather', parameters: { type: 'object', properties: { location: { type: 'string' } }, required: ['location'] } } },\n    from: 'openai',\n    to: 'anthropic'\n  })\n});\nconst { result } = await res.json();",
+        "python": "import requests\nres = requests.post('https://neverparse.com/api/v1/toolbridge/convert',\n  json={'tool': {'type': 'function', 'function': {'name': 'get_weather', 'description': 'Get weather', 'parameters': {'type': 'object', 'properties': {'location': {'type': 'string'}}, 'required': ['location']}}}, 'from': 'openai', 'to': 'anthropic'})\nresult = res.json()['result']"
+      },
+      "pricing": "free-tier",
+      "metrics": {
+        "requests": 0,
+        "errors": 0,
+        "avgLatencyMs": 0,
+        "signups": 0
+      },
+      "validation": {
+        "githubStars": 0,
+        "ctaClicks": 0,
+        "apiCalls": 0,
+        "lastChecked": null
+      },
+      "deploy": {
+        "platform": "vercel",
+        "url": null,
+        "lastDeployed": null,
+        "status": "pending"
+      },
+      "createdAt": "2026-02-24",
+      "updatedAt": "2026-02-24"
     }
   ],
   "config": {
