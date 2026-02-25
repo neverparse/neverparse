@@ -9,12 +9,21 @@ export const metadata: Metadata = {
   title: "Neverparse — Agent-Native Primitives",
   description:
     "Machine-discoverable, machine-consumable APIs and tools that make agents reliable in the real world.",
+  icons: {
+    icon: "/favicon.svg",
+  },
   openGraph: {
     title: "Neverparse",
     description: "Agent-native primitives for the real world.",
     url: "https://neverparse.com",
     siteName: "Neverparse",
     type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Neverparse — Agent-Native Primitives",
+    description:
+      "Machine-discoverable, machine-consumable APIs and tools that make agents reliable in the real world.",
   },
 };
 

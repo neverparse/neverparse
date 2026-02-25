@@ -10,6 +10,10 @@
   --np-accent: #00d4aa;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   font-family: "Inter", system-ui, sans-serif;
   background: var(--np-bg);
@@ -43,4 +47,49 @@ pre {
 /* Glow effect */
 .glow {
   box-shadow: 0 0 20px rgba(0, 212, 170, 0.15), 0 0 60px rgba(0, 212, 170, 0.05);
+}
+
+/* Hero gradient */
+.hero-gradient {
+  background: linear-gradient(
+    135deg,
+    rgba(0, 212, 170, 0.08) 0%,
+    rgba(0, 0, 0, 0) 40%,
+    rgba(0, 212, 170, 0.04) 60%,
+    rgba(0, 0, 0, 0) 100%
+  );
+  background-size: 200% 200%;
+}
+
+/* Syntax highlighting tokens */
+.token-keyword { color: #c792ea; }
+.token-string { color: #c3e88d; }
+.token-number { color: #f78c6c; }
+.token-comment { color: #546e7a; }
+.token-function { color: #82aaff; }
+.token-operator { color: #89ddff; }
+.token-punctuation { color: #89ddff; }
+.token-property { color: #f07178; }
+.token-boolean { color: #f78c6c; }
+.token-variable { color: #e5e5e5; }
+.token-builtin { color: #ffcb6b; }
+
+/* Stagger animation delays */
+.stagger-1 { animation-delay: 0ms; }
+.stagger-2 { animation-delay: 100ms; }
+.stagger-3 { animation-delay: 200ms; }
+.stagger-4 { animation-delay: 300ms; }
+
+/* Loading spinner */
+.spinner {
+  border: 2px solid rgba(0, 212, 170, 0.2);
+  border-top-color: #00d4aa;
+  border-radius: 50%;
+  width: 16px;
+  height: 16px;
+  animation: spin 0.6s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
 }
